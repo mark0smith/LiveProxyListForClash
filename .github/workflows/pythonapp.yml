@@ -41,8 +41,7 @@ jobs:
         # File to upload to the release
         file: temp_config.yml
         # Path to changelog file
-        changelogs: README.md
-        tag: Live
+        changelogs: changelog.txt
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

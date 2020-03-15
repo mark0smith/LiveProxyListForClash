@@ -1,6 +1,7 @@
 import requests
 import json
 import yaml
+import time
 
 def get_proxylist(filename = 'proxy.list'):
     raw_url = "https://github.com/fate0/proxylist/raw/master/proxy.list"
@@ -50,3 +51,7 @@ def generate_config(filename = 'proxy.list'):
 filename = 'proxy.list'
 get_proxylist(filename)
 generate_config(filename)
+
+with open("changelog.txt","w",encoding="utf8") as fw:
+    date = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+    fw.write(f"Updated at {date}.")
