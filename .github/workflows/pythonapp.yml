@@ -39,7 +39,7 @@ jobs:
       uses: yakuhzi/action-release@v1.2.0
       with:
         # File to upload to the release
-        file: temp_config.yml
+        file: temp_config.yml 
         # Path to changelog file
         changelogs: changelog.txt
       env:
