@@ -42,4 +42,7 @@ jobs:
         file: temp_config.yml
         # Path to changelog file
         changelogs: latest
+        tag: "Live"
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
