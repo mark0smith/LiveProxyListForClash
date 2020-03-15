@@ -37,6 +37,10 @@ jobs:
 #         path: temp_config.yml
     - name: Upload to Release
       uses: JasonEtco/upload-to-release@v0.1.1
+
+      with:
+          args: temp_config.yml
+
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
