@@ -44,5 +44,5 @@ jobs:
         changelogs: changelog.txt
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REF: "refs/tags/v0.1"
+          # GITHUB_REF: "refs/tags/v0.1"
 
