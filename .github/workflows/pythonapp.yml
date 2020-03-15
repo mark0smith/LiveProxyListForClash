@@ -27,9 +27,11 @@ jobs:
     - name: Lint with flake8
       run: |
         python ./generate_cfw.py
-    - name: Publish Release
-      uses: eregon/publish-release@v1.0.1
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
       with:
-        # The ID of the draft release to publish
-        release_id: 1
+        # Artifact name
+        name: LiveProxyListForClash
+        # Directory containing files to upload
+        path: temp_config.yml
 
