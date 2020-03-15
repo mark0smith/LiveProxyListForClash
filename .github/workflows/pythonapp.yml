@@ -3,7 +3,7 @@
 
 name: Python application
 
-on:[release,push]
+on: [release,push]
 
 jobs:
   build:
