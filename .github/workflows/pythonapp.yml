@@ -25,11 +25,18 @@ jobs:
     - name: Lint with flake8
       run: |
         python ./generate_cfw.py
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+#     - name: Upload artifact
+#       uses: actions/upload-artifact@v1.0.0
+#       with:
+#         # Artifact name
+#         name: LiveProxyListForClash.yaml
+#         # Directory containing files to upload
+#         path: temp_config.yml
+    - name: Action Release
+      uses: yakuhzi/action-release@v1.2.0
       with:
-        # Artifact name
-        name: LiveProxyListForClash.yaml
-        # Directory containing files to upload
-        path: temp_config.yml
+        # File to upload to the release
+        file: temp_config.yml
+        # Path to changelog file
+        changelogs: latest
 
