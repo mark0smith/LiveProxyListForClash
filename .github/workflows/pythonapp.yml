@@ -31,12 +31,17 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
-        python ./generate_cfw.py      
-    - uses: Shopify/upload-to-release
+        python ./generate_cfw.py 
+    - name: Upload to Release Action
+      uses: Shopify/upload-to-release@1.0.0
       with:
-        name: my-artifact
+        # Artifact name
+        name: temp_config.yml
+        # Path to the file to upload
         path: temp_config.yml
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        content-type: text/plain # Optional
+        # Content type for the file
+        content-type: text/plain # optional, default is application/octet-stream
+        # secrets.GITHUB_TOKEN
+        repo-token: ${{ secrets.GITHUB_TOKEN }}     
 
 
