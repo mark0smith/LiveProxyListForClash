@@ -4,9 +4,7 @@
 name: Python application
 
 on:
-  push:
-  schedule:
-    - cron:  '0 * * * *'
+  push
 
 jobs:
   build:
@@ -15,6 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Cache
+      uses: actions/cache@v1.1.2
+      with:
+        # A directory to store and save the cache
+        path: cache
+        # An explicit key for restoring and saving the cache
+        key: LiveProxyListForClash_cache
+        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
@@ -26,6 +32,15 @@ jobs:
     - name: Lint with flake8
       run: |
         python ./generate_cfw.py
+    - name: Upload Asset
+      uses: PeerXu/upload-asset@v1
+      with:
+        # which file to upload
+        file: temp_config.yml
+        # file suffix
+        suffix: ""
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
