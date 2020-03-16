@@ -1,26 +1,24 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: Generate CFW Config
 
 on:
-  push
+  push:
+  schedule:
+    - cron:  '*/5 * * * *'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Cache
       uses: actions/cache@v1.1.2
       with:
-        # A directory to store and save the cache
         path: cache
-        # An explicit key for restoring and saving the cache
         key: LiveProxyListForClash_cache
-        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
@@ -31,30 +29,14 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
-        python ./generate_cfw.py 
-#     - name: Upload to Release Action
-#       uses: Shopify/upload-to-release@1.0.0
-#       with:
-#         # Artifact name
-#         name: temp_config.yml
-#         # Path to the file to upload
-#         path: temp_config.yml
-#         # Content type for the file
-#         content-type: text/plain # optional, default is application/octet-stream
-#         # secrets.GITHUB_TOKEN
-#         repo-token: ${{ secrets.GITHUB_TOKEN }}     
+        python ./generate_cfw.py   
     - name: Upload files to a GitHub release
       uses: svenstaro/upload-release-action@1.0.1
       with:
-        # GitHub token
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        # Local file to upload
         file: temp_config.yml
-        # Name of the asset
-        asset_name: temp_config.yml
-        # Tag to use as a release
+        asset_name: RandomC0nfig.yml
         tag: v0.1
-        # Overwrite the release in case it already exists
         overwrite: true
 
 
