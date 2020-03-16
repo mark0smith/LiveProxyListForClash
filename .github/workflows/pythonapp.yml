@@ -31,23 +31,12 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
-        python ./generate_cfw.py
-    - name: Upload Asset
-      uses: PeerXu/upload-asset@v1
+        python ./generate_cfw.py      
+    - uses: Shopify/upload-to-release
       with:
-        # which file to upload
-        file: temp_config.yml
-        # file suffix
-        suffix: ""
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        # Artifact name
-        name: LiveProxyListForClash.yaml
-        # Directory containing files to upload
+        name: my-artifact
         path: temp_config.yml
-
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        content-type: text/plain # Optional
 
 
