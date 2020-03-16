@@ -81,6 +81,9 @@ def generate_config(filename = 'proxy.list'):
     output['Proxy Group'].append(proxy_cn)
     output['Proxy Group'].append(proxy_us)
     output['Proxy Group'].append(proxy_others)
+    output['Proxy Group'].append(g)
+    # output['Rules'] = ['MATCH,CN Proxy']
+
     with open("temp_config.yml",'w') as fw:
         yaml.safe_dump(output,fw)
 
