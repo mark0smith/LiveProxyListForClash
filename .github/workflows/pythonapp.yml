@@ -3,7 +3,10 @@
 
 name: Python application
 
-on: release
+on:
+  push:
+  schedule:
+    - cron:  '0 * * * *'
 
 jobs:
   build:
@@ -23,20 +26,13 @@ jobs:
     - name: Lint with flake8
       run: |
         python ./generate_cfw.py
-#     - name: Upload artifact
-#       uses: actions/upload-artifact@v1.0.0
-#       with:
-#         # Artifact name
-#         name: LiveProxyListForClash.yaml
-#         # Directory containing files to upload
-#         path: temp_config.yml
-    - name: Upload to Release
-      uses: JasonEtco/upload-to-release@v0.1.1
-
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
       with:
-          args: temp_config.yml
+        # Artifact name
+        name: LiveProxyListForClash.yaml
+        # Directory containing files to upload
+        path: temp_config.yml
 
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REF: refs/tags/Live
+
 
