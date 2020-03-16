@@ -24,6 +24,10 @@ def generate_config(filename = 'proxy.list'):
 
 
     index = 0
+    proxy_group_all = []
+    proxy_group_cn = []
+    proxy_group_us = []
+    proxy_group_others = []
     for proxy in proxy_list:
         index += 1
         p = {}
@@ -31,19 +35,52 @@ def generate_config(filename = 'proxy.list'):
         p['type'] = "http"
         p['server'] = proxy['host']
         p['port'] = proxy['port']
+        p['remarks'] = str(index)
         if proxy['type'] == "https":
             # p['type'] = "https"
             p['tls']= True
             p['skip-cert-verify']= True
+        if proxy['country'] == "CN":
+            proxy_group_cn.append(str(index))
+        elif proxy['country'] == "US":
+            proxy_group_us.append(str(index))
+        else:
+            proxy_group_others.append(str(index))
+
+        proxy_group_all.append(str(index))
         output['Proxy'].append(p)
+    
     g = {
         'name':'Proxy',
-        'proxies': [str(x) for x in range(1,index)],
+        'proxies': proxy_group_all,
         'type':"url-test",
         "url":"http://www.gstatic.com/generate_204",
         "interval":600
     }
-    output['Proxy Group'].append(g)
+    proxy_cn = {
+        'name':'CN Proxy',
+        'proxies': proxy_group_cn,
+        'type':"url-test",
+        "url":"http://www.baidu.com",
+        "interval":600
+    }
+    proxy_us = {
+        'name':'US Proxy',
+        'proxies': proxy_group_us,
+        'type':"url-test",
+        "url":"http://www.gstatic.com/generate_204",
+        "interval":600
+    }
+    proxy_others = {
+        'name':'Others Proxy',
+        'proxies': proxy_group_others,
+        'type':"url-test",
+        "url":"http://www.gstatic.com/generate_204",
+        "interval":600
+    }
+    output['Proxy Group'].append(proxy_cn)
+    output['Proxy Group'].append(proxy_us)
+    output['Proxy Group'].append(proxy_others)
     with open("temp_config.yml",'w') as fw:
         yaml.safe_dump(output,fw)
 
