@@ -32,16 +32,29 @@ jobs:
     - name: Lint with flake8
       run: |
         python ./generate_cfw.py 
-    - name: Upload to Release Action
-      uses: Shopify/upload-to-release@1.0.0
+#     - name: Upload to Release Action
+#       uses: Shopify/upload-to-release@1.0.0
+#       with:
+#         # Artifact name
+#         name: temp_config.yml
+#         # Path to the file to upload
+#         path: temp_config.yml
+#         # Content type for the file
+#         content-type: text/plain # optional, default is application/octet-stream
+#         # secrets.GITHUB_TOKEN
+#         repo-token: ${{ secrets.GITHUB_TOKEN }}     
+    - name: Upload files to a GitHub release
+      uses: svenstaro/upload-release-action@1.0.1
       with:
-        # Artifact name
-        name: temp_config.yml
-        # Path to the file to upload
-        path: temp_config.yml
-        # Content type for the file
-        content-type: text/plain # optional, default is application/octet-stream
-        # secrets.GITHUB_TOKEN
-        repo-token: ${{ secrets.GITHUB_TOKEN }}     
+        # GitHub token
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        # Local file to upload
+        file: temp_config.yml
+        # Name of the asset
+        asset_name: temp_config.yml
+        # Tag to use as a release
+        tag: v0.1
+        # Overwrite the release in case it already exists
+        overwrite: true
 
 
