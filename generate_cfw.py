@@ -53,8 +53,8 @@ def generate_config(filename = 'proxy.list'):
     g = {
         'name':'Proxy',
         'proxies': proxy_group_all,
-        'type':"url-test",
-        "url":"http://www.gstatic.com/generate_204",
+        'type':"select",
+        # "url":"http://www.gstatic.com/generate_204",
         "interval":600
     }
     proxy_cn = {
