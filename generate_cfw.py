@@ -14,6 +14,9 @@ def get_proxylist(filename = 'proxy.list'):
             fw.write(iter)
 
 def check_single_proxy(proxy):
+    # always return True 😅
+    return True
+
     proxies = {
         "http":f"http://{proxy['host']}:{proxy['port']}",
         "https":f"https://{proxy['host']}:{proxy['port']}",
