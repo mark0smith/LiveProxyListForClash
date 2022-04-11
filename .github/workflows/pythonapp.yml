@@ -4,9 +4,9 @@
 name: Generate CFW Config
 
 on:
-  push:
-#   schedule:
-#     - cron:  '*/5 * * * *'
+#   push:
+  schedule:
+    - cron:  '*/30 * * * *'
 
 jobs:
   build:
