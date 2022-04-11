@@ -67,7 +67,7 @@ def generate_config(filename = 'proxy.list'):
     
     proxy_list = check_valid(proxy_list)
     
-    output['Proxy'] = []
+    output['proxies'] = []
     output['Proxy Group'] = [] 
 
 
@@ -96,7 +96,7 @@ def generate_config(filename = 'proxy.list'):
             proxy_group_others.append(p['name'])
 
         # proxy_group_all.append(p['name'])
-        output['Proxy'].append(p)
+        output['proxies'].append(p)
     
     g = {
         'name':'Proxy',
